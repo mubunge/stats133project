@@ -1,0 +1,83 @@
+---
+title: "Expense per ADA 99-05"
+author: "Perry"
+date: ""
+output: 
+  html_document:
+    fig_height: 3
+    fig_width: 5
+---
+<!-- Don't edit in between this line and the one below -->
+```{r include=FALSE}
+# Don't delete this chunk if you are using the DataComputing package
+library(DataComputing)
+```
+*Source file* 
+```{r, results='asis', echo=FALSE}
+includeSourceDocuments()
+```
+<!-- Don't edit the material above this line -->
+
+```{r}
+library(tidyverse)
+library(readxl)
+library(dplyr)
+
+#99
+funding99<-read_excel("~/Downloads/costofed9899.xls")
+funding99<-funding99[-(1:7),]
+col_names <- c("CO","LEA ID","DISTRICT","EXPENDITURES","CURRENT EXPENSE ADA","CURRENT EXPENSE PER ADA","LEA TYPE")
+names(funding99)<-col_names
+mean99<-mean(as.numeric(funding99$`CURRENT EXPENSE PER ADA`))
+
+
+#00
+funding00<-read_excel("~/Downloads/costofed9900.xls")
+funding00<-funding00[-(1:7),]
+names(funding00)<-col_names
+mean00<-mean(as.numeric(funding00$`CURRENT EXPENSE PER ADA`))
+
+
+#01
+funding01<-read_excel("~/Downloads/costofed0001.xls")
+funding01<-funding01[-(1:7),]
+names(funding01)<-col_names
+mean01<-mean(as.numeric(funding01$`CURRENT EXPENSE PER ADA`))
+
+
+#02
+funding02<-read_excel("~/Downloads/costofed0102.xls")
+funding02<-funding02[-(1:7),]
+names(funding02)<-col_names
+mean02<-mean(as.numeric(funding02$`CURRENT EXPENSE PER ADA`))
+
+
+#03
+funding03<-read_excel("~/Downloads/costofed0203.xls")
+funding03<-funding03[-(1:7),]
+names(funding03)<-col_names
+mean03<-mean(funding03$`CURRENT EXPENSE PER ADA`)
+
+
+#04
+funding04<-read_excel("~/Downloads/currentexpense0304.xls")
+funding04<-funding04[-(1:7),]
+names(funding04)<-col_names
+mean04<-mean(as.numeric(funding04$`CURRENT EXPENSE PER ADA`))
+
+
+#05
+funding05<-read_excel("~/Downloads/currentexpense0405.xls")
+funding05<-funding05[-(1:7),]
+names(funding05)<-col_names
+mean05<-mean(as.numeric(funding05$`CURRENT EXPENSE PER ADA`))
+
+
+
+years<-c(1999:2005)
+per_ada<-c(mean99,mean00,mean01,mean02,mean03,mean04,mean05)
+funding99_05<-data.frame(years,per_ada)
+funding99_05
+
+
+```
