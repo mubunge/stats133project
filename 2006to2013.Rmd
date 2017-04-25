@@ -1,0 +1,92 @@
+---
+title: "Untitled"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+install.packages("readxl")
+library("readxl")
+
+```
+
+```{r}
+library(dplyr)
+```
+2006
+```{r}
+file_2006<-read_excel("C:/Users/mbunge/Desktop/stats133project/2006.xls")
+file_2006<-file_2006[-(1:7),]
+new_names <- c("CO","LEA ID","DISTRICT","EXPENDITURES","CURRENT EXPENSE ADA","CURRENT EXPENSE PER ADA","LEA TYPE")
+names(file_2006)<-new_names
+mean_2006<-mean(as.numeric(file_2006$`CURRENT EXPENSE PER ADA`))
+```
+
+2007
+```{r}
+file_2007<-read_excel("C:/Users/mbunge/Desktop/stats133project/2007.xls")
+file_2007<-file_2007[-(1:8),]
+names(file_2007)<-new_names
+mean_2007<-mean(as.numeric(file_2007$`CURRENT EXPENSE PER ADA`))
+```
+
+2008
+```{r}
+file_2008<-read_excel("C:/Users/mbunge/Desktop/stats133project/2008.xls")
+file_2008<-file_2008[-(1:8),]
+names(file_2008)<-new_names
+mean_2008<-mean(as.numeric(file_2008$`CURRENT EXPENSE PER ADA`))
+```
+
+2009
+```{r}
+file_2009<-read_excel("C:/Users/mbunge/Desktop/stats133project/2009.xls")
+file_2009<-file_2009[-(1:7),]
+names(file_2009)<-new_names
+mean_2009<-mean(as.numeric(file_2009$`CURRENT EXPENSE PER ADA`))
+```
+
+2010
+```{r}
+file_2010<-read_excel("C:/Users/mbunge/Desktop/stats133project/2010.xls")
+file_2010<-file_2010[-(1:7),]
+names(file_2010)<-new_names
+mean_2010<-mean(as.numeric(file_2010$`CURRENT EXPENSE PER ADA`))
+```
+
+2011
+```{r}
+file_2011<-read_excel("C:/Users/mbunge/Desktop/stats133project/2011.xls")
+file_2011<-file_2011[-(1:7),]
+names(file_2011)<-new_names
+mean_2011<-mean(as.numeric(file_2011$`CURRENT EXPENSE PER ADA`))
+```
+
+2012
+```{r}
+file_2012<-read_excel("C:/Users/mbunge/Desktop/stats133project/2012.xls")
+file_2012<-file_2012[-(1:7),]
+names(file_2012)<-new_names
+mean_2012<-mean(as.numeric(file_2012$`CURRENT EXPENSE PER ADA`))
+```
+
+2013
+```{r}
+file_2013<-read_excel("C:/Users/mbunge/Desktop/stats133project/2013.xls")
+file_2013<-file_2013[-(1:7),]
+names(file_2013)<-new_names
+mean_2013<-mean(as.numeric(file_2013$`CURRENT EXPENSE PER ADA`))
+```
+
+Create Data Frame for 2006 to 2013
+```{r}
+year<-c(2006:2013)
+avg_current_expense_per_ada<-c(mean_2006,mean_2007,mean_2008,mean_2009,mean_2010,mean_2011,mean_2012,mean_2013)
+funding2006_2013<-data.frame(year,avg_current_expense_per_ada)
+funding2006_2013
+
+```
+```
