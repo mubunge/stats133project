@@ -1,0 +1,63 @@
+---
+title: "what"
+author: "batman"
+date: ""
+output: html_document
+---
+<!-- leave this material as is -->
+Compiled on `r base::date()`.
+
+```{r include = FALSE}
+library(DataComputing)
+library(printr)
+```
+<!-- put your content after this line -->
+*Source file* 
+```{r, results='asis', echo=FALSE}
+includeSourceDocuments()
+```
+
+<!-- Don't edit the material above this line -->r
+get data from tab delimited files and csvs
+```{r}
+# store a list of files
+files <- dir("star_results/", recursive = T)
+excludeFiles <- grepl("entities|Entities", files, perl = T)
+files <- files[!excludeFiles]
+files <- lapply(files, function(x) {paste("star_results/", x, sep = "")})
+
+# now get the stuff we want
+for (f in files) {
+    if (grepl("csv|CSV", f)) {
+        cur <- read.csv(f)
+    } else {
+        cur <- read.table(f, sep = "\t", header = T)
+        if (f == "star_results/1998/tdstar.tab") {
+            cur <- cur %>%
+                select(-c(County_Code, School_Code,
+                          County_Name, School_Name,
+                          District_Name, Summary_Type, Grade_Level,
+                          Total_Enrolled, Total_Tested,
+                          Reading_Total_Valid, Math_Total_Valid,
+                          Language_Total_Valid, Spelling_Total_Valid,
+                          Science_Total_Valid, Social_Science_Total_Valid))
+
+            cur[, -1] <- cur[, -1] %>%
+                sapply(as.numeric)
+
+            cur <- cur %>%
+                group_by(District_Code, Record_Type) %>%
+                summarise_each(funs(mean))
+
+            print(cur)
+        }
+    }
+}
+```
+
+<!-- html classes -->
+<style>
+.paddedTable td {
+padding: 0px 5px 0px;
+}
+</style>
