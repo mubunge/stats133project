@@ -1,0 +1,412 @@
+---
+title: "Untitled"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+install.packages("readxl")
+library("readxl")
+
+```
+
+```{r}
+library(dplyr)
+```
+
+
+
+1998
+```{r}
+funding98<-read_excel("C:/Users/mbunge/Desktop/stats133project/1998.xls")
+funding98<-funding98[-(1:7),]
+col_names <- c("CO","LEA ID","DISTRICT","EXPENDITURES","CURRENT EXPENSE ADA","CURRENT EXPENSE PER ADA","LEA TYPE")
+names(funding98)<-col_names
+funding98
+mean_1998<-mean(as.numeric(funding98$`CURRENT EXPENSE PER ADA`))
+mean_1998
+unified_98<-funding98%>%
+  filter(`LEA TYPE`=="Unified")
+mean_1998_unified<-mean(as.numeric(unified_98$`CURRENT EXPENSE PER ADA`))
+elementary_1998<-funding98%>%
+  filter(`LEA TYPE`=="Elementary")
+mean_1998_elementary<-mean(as.numeric(elementary_1998$`CURRENT EXPENSE PER ADA`))
+highschool_1998<-funding98%>%
+  filter(`LEA TYPE`=="High School")
+highschool_1998
+mean_highschool_1998<-mean(as.numeric(highschool_1998$`CURRENT EXPENSE PER ADA`))
+mean_highschool_1998
+common_1998<-funding98%>%
+  filter(`LEA TYPE`=="Common Administration")
+common_1998
+mean_common_1998<-mean(as.numeric(common_1998$`CURRENT EXPENSE PER ADA`))
+
+```
+
+1999
+```{r}
+funding99<-read_excel("C:/Users/mbunge/Desktop/stats133project/1999.xls")
+funding99<-funding99[-(1:7),]
+names(funding99)<-col_names
+mean_1999<-mean(as.numeric(funding99$`CURRENT EXPENSE PER ADA`))
+mean_1999
+unified_99<-funding99%>%
+  filter(`LEA TYPE`=="Unified")
+mean_1999_unified<-mean(as.numeric(unified_99$`CURRENT EXPENSE PER ADA`))
+elementary_1999<-funding99%>%
+  filter(`LEA TYPE`=="Elementary")
+mean_1999_elementary<-mean(as.numeric(elementary_1999$`CURRENT EXPENSE PER ADA`))
+highschool_1999<-funding99%>%
+  filter(`LEA TYPE`=="High School")
+mean_highschool_1999<-mean(as.numeric(highschool_1999$`CURRENT EXPENSE PER ADA`))
+common_1999<-funding99%>%
+  filter(`LEA TYPE`=="Common Administration")
+mean_common_1999<-mean(as.numeric(common_1999$`CURRENT EXPENSE PER ADA`))
+```
+
+2000
+```{r}
+funding00<-read_excel("C:/Users/mbunge/Desktop/stats133project/2000.xls")
+funding00<-funding00[-(1:7),]
+names(funding00)<-col_names
+mean_2000<-mean(as.numeric(funding00$`CURRENT EXPENSE PER ADA`))
+unified_00<-funding00%>%
+  filter(`LEA TYPE`=="Unified")
+mean_2000_unified<-mean(as.numeric(unified_00$`CURRENT EXPENSE PER ADA`))
+elementary_2000<-funding00%>%
+  filter(`LEA TYPE`=="Elementary")
+mean_2000_elementary<-mean(as.numeric(elementary_2000$`CURRENT EXPENSE PER ADA`))
+highschool_2000<-funding00%>%
+  filter(`LEA TYPE`=="High School")
+mean_highschool_2000<-mean(as.numeric(highschool_2000$`CURRENT EXPENSE PER ADA`))
+common_2000<-funding00%>%
+  filter(`LEA TYPE`=="Common Administration")
+mean_common_2000<-mean(as.numeric(common_2000$`CURRENT EXPENSE PER ADA`))
+
+```
+
+2001
+```{r}
+funding01<-read_excel("C:/Users/mbunge/Desktop/stats133project/2001.xls")
+funding01<-funding01[-(1:7),]
+names(funding01)<-col_names
+mean_2001<-mean(as.numeric(funding01$`CURRENT EXPENSE PER ADA`))
+unified_01<-funding01%>%
+  filter(`LEA TYPE`=="Unified")
+mean_2001_unified<-mean(as.numeric(unified_01$`CURRENT EXPENSE PER ADA`))
+elementary_2001<-funding01%>%
+  filter(`LEA TYPE`=="Elementary")
+mean_2001_elementary<-mean(as.numeric(elementary_2001$`CURRENT EXPENSE PER ADA`))
+highschool_2001<-funding01%>%
+  filter(`LEA TYPE`=="High School")
+mean_highschool_2001<-mean(as.numeric(highschool_2001$`CURRENT EXPENSE PER ADA`))
+common_2001<-funding01%>%
+  filter(`LEA TYPE`=="Common Administration")
+mean_common_2001<-mean(as.numeric(common_2001$`CURRENT EXPENSE PER ADA`))
+
+```
+
+2002
+```{r}
+funding02<-read_excel("C:/Users/mbunge/Desktop/stats133project/2002.xls")
+funding02<-funding02[-(1:8),]
+names(funding02)<-col_names
+funding02
+mean_2002<-mean(as.numeric(funding02$`CURRENT EXPENSE PER ADA`))
+unified_02<-funding00%>%
+  filter(`LEA TYPE`=="Unified")
+mean_2002_unified<-mean(as.numeric(unified_02$`CURRENT EXPENSE PER ADA`))
+elementary_2002<-funding02%>%
+  filter(`LEA TYPE`=="Elementary")
+mean_2002_elementary<-mean(as.numeric(elementary_2002$`CURRENT EXPENSE PER ADA`))
+highschool_2002<-funding02%>%
+  filter(`LEA TYPE`=="High School")
+mean_highschool_2002<-mean(as.numeric(highschool_2002$`CURRENT EXPENSE PER ADA`))
+common_2002<-funding02%>%
+  filter(`LEA TYPE`=="Common Administration")
+mean_common_2002<-mean(as.numeric(common_2002$`CURRENT EXPENSE PER ADA`))
+
+```
+
+2003
+```{r}
+funding03<-read_excel("C:/Users/mbunge/Desktop/stats133project/2003.xls")
+funding03<-funding03[-(1:7),]
+names(funding03)<-col_names
+mean_2003<-mean(as.numeric(funding03$`CURRENT EXPENSE PER ADA`))
+unified_03<-funding03%>%
+  filter(`LEA TYPE`=="Unified")
+mean_2003_unified<-mean(as.numeric(unified_03$`CURRENT EXPENSE PER ADA`))
+elementary_2003<-funding03%>%
+  filter(`LEA TYPE`=="Elementary")
+mean_2003_elementary<-mean(as.numeric(elementary_2003$`CURRENT EXPENSE PER ADA`))
+highschool_2003<-funding03%>%
+  filter(`LEA TYPE`=="High School")
+mean_highschool_2003<-mean(as.numeric(highschool_2003$`CURRENT EXPENSE PER ADA`))
+common_2003<-funding03%>%
+  filter(`LEA TYPE`=="Common Administration")
+mean_common_2003<-mean(as.numeric(common_2003$`CURRENT EXPENSE PER ADA`))
+
+```
+
+2004
+```{r}
+funding04<-read_excel("C:/Users/mbunge/Desktop/stats133project/2004.xls")
+funding04<-funding04[-(1:7),]
+names(funding04)<-col_names
+mean_2004<-mean(as.numeric(funding04$`CURRENT EXPENSE PER ADA`))
+unified_04<-funding04%>%
+  filter(`LEA TYPE`=="Unified")
+mean_2004_unified<-mean(as.numeric(unified_04$`CURRENT EXPENSE PER ADA`))
+elementary_2004<-funding04%>%
+  filter(`LEA TYPE`=="Elementary")
+mean_2004_elementary<-mean(as.numeric(elementary_2004$`CURRENT EXPENSE PER ADA`))
+highschool_2004<-funding04%>%
+  filter(`LEA TYPE`=="High School")
+mean_highschool_2004<-mean(as.numeric(highschool_2004$`CURRENT EXPENSE PER ADA`))
+common_2004<-funding04%>%
+  filter(`LEA TYPE`=="Common Administration")
+mean_common_2004<-mean(as.numeric(common_2004$`CURRENT EXPENSE PER ADA`))
+mean_common_2004
+
+```
+
+2005
+```{r}
+file_2005<-read_excel("C:/Users/mbunge/Desktop/stats133project/2005.xls")
+file_2005<-file_2005[-(1:7),]
+new_names <- c("CO","LEA ID","DISTRICT","EXPENDITURES","CURRENT EXPENSE ADA","CURRENT EXPENSE PER ADA","LEA TYPE")
+names(file_2005)<-new_names
+mean_2005<-mean(as.numeric(file_2005$`CURRENT EXPENSE PER ADA`))
+unified_05<-file_2005%>%
+  filter(`LEA TYPE`=="Unified")
+mean_2005_unified<-mean(as.numeric(unified_05$`CURRENT EXPENSE PER ADA`))
+elementary_2005<-file_2005%>%
+  filter(`LEA TYPE`=="Elementary")
+mean_2005_elementary<-mean(as.numeric(elementary_2005$`CURRENT EXPENSE PER ADA`))
+highschool_2005<-file_2005%>%
+  filter(`LEA TYPE`=="High School")
+highschool_2005
+mean_highschool_2005<-mean(as.numeric(highschool_2005$`CURRENT EXPENSE PER ADA`))
+common_2005<-file_2005%>%
+  filter(`LEA TYPE`=="Common Admin")
+mean_common_2005<-mean(as.numeric(common_2005$`CURRENT EXPENSE PER ADA`))
+mean_common_2005
+```
+
+2006
+```{r}
+file_2006<-read_excel("C:/Users/mbunge/Desktop/stats133project/2006.xls")
+file_2006<-file_2006[-(1:8),]
+names(file_2006)<-new_names
+mean_2006<-mean(as.numeric(file_2006$`CURRENT EXPENSE PER ADA`))
+unified_06<-file_2006%>%
+  filter(`LEA TYPE`=="Unified")
+mean_2006_unified<-mean(as.numeric(unified_06$`CURRENT EXPENSE PER ADA`))
+elementary_2006<-file_2006%>%
+  filter(`LEA TYPE`=="Elementary")
+mean_2006_elementary<-mean(as.numeric(elementary_2006$`CURRENT EXPENSE PER ADA`))
+highschool_2006<-file_2006%>%
+  filter(`LEA TYPE`=="High School")
+mean_highschool_2006<-mean(as.numeric(highschool_2006$`CURRENT EXPENSE PER ADA`))
+common_2006<-file_2006%>%
+  filter(`LEA TYPE`=="Common Admin")
+mean_common_2006<-mean(as.numeric(common_2006$`CURRENT EXPENSE PER ADA`))
+mean_common_2006
+```
+
+2007
+```{r}
+file_2007<-read_excel("C:/Users/mbunge/Desktop/stats133project/2007.xls")
+file_2007<-file_2007[-(1:8),]
+names(file_2007)<-new_names
+mean_2007<-mean(as.numeric(file_2007$`CURRENT EXPENSE PER ADA`))
+unified_07<-file_2007%>%
+  filter(`LEA TYPE`=="Unified")
+mean_2007_unified<-mean(as.numeric(unified_07$`CURRENT EXPENSE PER ADA`))
+elementary_2007<-file_2007%>%
+  filter(`LEA TYPE`=="Elementary")
+mean_2007_elementary<-mean(as.numeric(elementary_2007$`CURRENT EXPENSE PER ADA`))
+highschool_2007<-file_2007%>%
+  filter(`LEA TYPE`=="High School")
+mean_highschool_2007<-mean(as.numeric(highschool_2007$`CURRENT EXPENSE PER ADA`))
+common_2007<-file_2007%>%
+  filter(`LEA TYPE`=="Comm Admin")
+mean_common_2007<-mean(as.numeric(common_2007$`CURRENT EXPENSE PER ADA`))
+mean_common_2007
+
+```
+
+2008
+```{r}
+file_2008<-read_excel("C:/Users/mbunge/Desktop/stats133project/2008.xls")
+file_2008<-file_2008[-(1:8),]
+names(file_2008)<-new_names
+mean_2008<-mean(as.numeric(file_2008$`CURRENT EXPENSE PER ADA`))
+unified_08<-file_2008%>%
+  filter(`LEA TYPE`=="Unified")
+mean_2008_unified<-mean(as.numeric(unified_08$`CURRENT EXPENSE PER ADA`))
+elementary_2008<-file_2008%>%
+  filter(`LEA TYPE`=="Elementary")
+mean_2008_elementary<-mean(as.numeric(elementary_2008$`CURRENT EXPENSE PER ADA`))
+highschool_2008<-file_2008%>%
+  filter(`LEA TYPE`=="High School")
+mean_highschool_2008<-mean(as.numeric(highschool_2008$`CURRENT EXPENSE PER ADA`))
+common_2008<-file_2008%>%
+  filter(`LEA TYPE`=="Comm Admin")
+mean_common_2008<-mean(as.numeric(common_2008$`CURRENT EXPENSE PER ADA`))
+mean_common_2008
+
+```
+
+2009
+```{r}
+file_2009<-read_excel("C:/Users/mbunge/Desktop/stats133project/2009.xls")
+file_2009<-file_2009[-(1:7),]
+names(file_2009)<-new_names
+mean_2009<-mean(as.numeric(file_2009$`CURRENT EXPENSE PER ADA`))
+unified_09<-file_2009%>%
+  filter(`LEA TYPE`=="Unified")
+mean_2009_unified<-mean(as.numeric(unified_09$`CURRENT EXPENSE PER ADA`))
+elementary_2009<-file_2009%>%
+  filter(`LEA TYPE`=="Elementary")
+mean_2009_elementary<-mean(as.numeric(elementary_2009$`CURRENT EXPENSE PER ADA`))
+mean_2009_elementary
+highschool_2009<-file_2009%>%
+  filter(`LEA TYPE`=="High")
+mean_highschool_2009<-mean(as.numeric(highschool_2009$`CURRENT EXPENSE PER ADA`))
+mean_highschool_2009
+common_2009<-file_2009%>%
+  filter(`LEA TYPE`=="Comm admin")
+mean_common_2009<-mean(as.numeric(common_2009$`CURRENT EXPENSE PER ADA`))
+mean_common_2009
+
+```
+```{r}
+file_2009$`LEA TYPE`
+```
+
+2010
+```{r}
+file_2010<-read_excel("C:/Users/mbunge/Desktop/stats133project/2010.xls")
+file_2010<-file_2010[-(1:7),]
+names(file_2010)<-new_names
+mean_2010<-mean(as.numeric(file_2010$`CURRENT EXPENSE PER ADA`))
+unified_10<-file_2010%>%
+  filter(`LEA TYPE`=="Unified")
+mean_2010_unified<-mean(as.numeric(unified_10$`CURRENT EXPENSE PER ADA`))
+elementary_2010<-file_2010%>%
+  filter(`LEA TYPE`=="Elementary")
+mean_2010_elementary<-mean(as.numeric(elementary_2010$`CURRENT EXPENSE PER ADA`))
+highschool_2010<-file_2010%>%
+  filter(`LEA TYPE`=="High")
+mean_highschool_2010<-mean(as.numeric(highschool_2010$`CURRENT EXPENSE PER ADA`))
+common_2010<-file_2010%>%
+  filter(`LEA TYPE`=="Comm Admin")
+mean_common_2010<-mean(as.numeric(common_2010$`CURRENT EXPENSE PER ADA`))
+mean_highschool_2010
+mean_common_2010
+```
+
+2011
+```{r}
+file_2011<-read_excel("C:/Users/mbunge/Desktop/stats133project/2011.xls")
+file_2011<-file_2011[-(1:7),]
+names(file_2011)<-new_names
+mean_2011<-mean(as.numeric(file_2011$`CURRENT EXPENSE PER ADA`))
+unified_11<-file_2011%>%
+  filter(`LEA TYPE`=="Unified")
+mean_2011_unified<-mean(as.numeric(unified_11$`CURRENT EXPENSE PER ADA`))
+elementary_2011<-file_2011%>%
+  filter(`LEA TYPE`=="Elementary")
+mean_2011_elementary<-mean(as.numeric(elementary_2011$`CURRENT EXPENSE PER ADA`))
+highschool_2011<-file_2011%>%
+  filter(`LEA TYPE`=="High School")
+mean_highschool_2011<-mean(as.numeric(highschool_2011$`CURRENT EXPENSE PER ADA`))
+common_2011<-file_2011%>%
+  filter(`LEA TYPE`=="Comm Admin")
+mean_common_2011<-mean(as.numeric(common_2011$`CURRENT EXPENSE PER ADA`))
+mean_highschool_2011
+mean_common_2011
+```
+
+2012
+```{r}
+file_2012<-read_excel("C:/Users/mbunge/Desktop/stats133project/2012.xls")
+file_2012<-file_2012[-(1:7),]
+names(file_2012)<-new_names
+mean_2012<-mean(as.numeric(file_2012$`CURRENT EXPENSE PER ADA`))
+unified_12<-file_2012%>%
+  filter(`LEA TYPE`=="Unified")
+mean_2012_unified<-mean(as.numeric(unified_12$`CURRENT EXPENSE PER ADA`))
+elementary_2012<-file_2012%>%
+  filter(`LEA TYPE`=="Elementary")
+mean_2012_elementary<-mean(as.numeric(elementary_2012$`CURRENT EXPENSE PER ADA`))
+highschool_2012<-file_2012%>%
+  filter(`LEA TYPE`=="High")
+highschool_2012
+mean_highschool_2012<-mean(as.numeric(highschool_2012$`CURRENT EXPENSE PER ADA`))
+common_2012<-file_2012%>%
+  filter(`LEA TYPE`=="Comm admin dist")
+mean_common_2012<-mean(as.numeric(common_2012$`CURRENT EXPENSE PER ADA`))
+mean_highschool_2012
+mean_common_2012
+
+```
+
+
+Create Data Frame for 2006 to 2012
+```{r}
+year<-c(1998:2012)
+
+avg_current_expense_per_ada<-c(mean_1998,mean_1999,mean_2000,mean_2001,mean_2002,mean_2003,mean_2004,mean_2005,mean_2006,mean_2007,mean_2008,mean_2009,mean_2010,mean_2011,mean_2012)
+
+avg_current_expense_per_ada_union<-c(mean_1998_unified,mean_1999_unified,mean_2000_unified,mean_2001_unified,mean_2002_unified,mean_2003_unified,mean_2004_unified,mean_2005_unified,mean_2006_unified,mean_2007_unified,mean_2008_unified,mean_2009_unified,mean_2010_unified,mean_2011_unified,mean_2012_unified)
+
+avg_current_expense_per_ada_elementary<-c(mean_1998_elementary,mean_1999_elementary,mean_2000_elementary,mean_2001_elementary,mean_2002_elementary,mean_2003_elementary,mean_2004_elementary,mean_2005_elementary,mean_2006_elementary,mean_2007_elementary,mean_2008_elementary,mean_2009_elementary,mean_2010_elementary,mean_2011_elementary,mean_2012_elementary)
+
+avg_current_expense_per_ada_highschool<-c(mean_highschool_1998,mean_highschool_1999,mean_highschool_2000,mean_highschool_2001,mean_highschool_2002,mean_highschool_2003,mean_highschool_2004,mean_highschool_2005,mean_highschool_2006,mean_highschool_2007,mean_highschool_2008,mean_highschool_2009,mean_highschool_2010,mean_highschool_2011,mean_highschool_2012)
+
+avg_current_expense_per_ada_common<-c(mean_common_1998,mean_common_1999,mean_common_2000,mean_common_2001,mean_common_2002,mean_common_2003,mean_common_2004,mean_common_2005,mean_common_2006,mean_common_2007,mean_common_2008,mean_common_2009,mean_common_2010,mean_common_2011,mean_common_2012)
+
+funding1998_2012<-data.frame(year,avg_current_expense_per_ada,avg_current_expense_per_ada_union,avg_current_expense_per_ada_elementary,avg_current_expense_per_ada_highschool,avg_current_expense_per_ada_common)
+
+```
+
+```{r}
+library(ggplot2)
+avg_ada<- ggplot(data=funding1998_2012, aes(x=year, y=avg_current_expense_per_ada)) +
+    geom_line() +
+    geom_point()+
+  labs(title="1998 to 2012 Avg Funding",x="Year", y="Avg Funding Per Student")  
+avg_ada
+
+avg_ada_union<- ggplot(data=funding1998_2012, aes(x=year, y=avg_current_expense_per_ada_union)) +
+    geom_line() +
+    geom_point()+
+   labs(title="1998 to 2012 Avg Funding, Unified",x="Year", y="Avg Funding Per Student") 
+avg_ada_union
+
+avg_ada_elementary<- ggplot(data=funding1998_2012, aes(x=year, y=avg_current_expense_per_ada_elementary)) +
+    geom_line() +
+    geom_point()+
+   labs(title="1998 to 2012 Avg Funding, Elementary",x="Year", y="Avg Funding Per Student") 
+avg_ada_elementary
+
+avg_ada_highschool<- ggplot(data=funding1998_2012, aes(x=year, y=avg_current_expense_per_ada_highschool)) +
+    geom_line() +
+    geom_point()+
+   labs(title="1998 to 2012 Avg Funding, High School",x="Year", y="Avg Funding Per Student") 
+avg_ada_highschool
+
+avg_ada_common<- ggplot(data=funding1998_2012, aes(x=year, y=avg_current_expense_per_ada_common)) +
+    geom_line() +
+    geom_point()+
+   labs(title="1998 to 2012 Avg Funding, Common Administration",x="Year", y="Avg Funding Per Student") 
+avg_ada_common
+```
+
+```
