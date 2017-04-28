@@ -10,6 +10,7 @@ Compiled on `r base::date()`.
 ```{r include = FALSE}
 library(DataComputing)
 library(printr)
+library(feather)
 ```
 <!-- put your content after this line -->
 *Source file* 
@@ -48,10 +49,14 @@ for (f in files) {
             cur <- cur %>%
                 group_by(District_Code, Record_Type) %>%
                 summarise_each(funs(mean))
-
-            print(cur)
         }
     }
+
+    # serialize to binary file
+    year_matches <- stringr::str_match(f, "(star_results/\\d{4})/.*")
+    year <- year_matches[[2]]
+    binary <- paste(year, ".feather", sep = "")
+    write_feather(cur, binary)
 }
 ```
 
