@@ -1,0 +1,285 @@
+---
+title: "freereduced_2004_2012"
+author: ""
+date: ""
+output: 
+  html_document:
+    fig_height: 3
+    fig_width: 5
+---
+<!-- Don't edit in between this line and the one below -->
+```{r include=FALSE}
+# Don't delete this chunk if you are using the DataComputing package
+library(DataComputing)
+```
+*Source file* 
+```{r, results='asis', echo=FALSE}
+includeSourceDocuments()
+```
+<!-- Don't edit the material above this line -->
+
+```{r}
+install.packages("readxl")
+library("readxl")
+library(dplyr)
+```
+```{r}
+library(XLConnectJars)
+library(XLConnect)
+
+```
+
+```{r}
+
+lunch04<-read_excel("C:/Users/mbunge/Desktop/stats133project/freereduced/2004.xls", sheet = 2)
+
+colnames(lunch04)
+lunch04<-subset(lunch04,select=c("DCODE","LEA","School Name","Percent\nFRPM"))
+
+col_names<-c("District Code","District Name","School Name","PR FRPM")
+names(lunch04)<-col_names
+
+
+AVG_PR_FRPM04<-lunch04%>%group_by(`District Code`)%>%summarise(AVG_PR_FRPM=mean(`PR FRPM`))
+
+lunch04<-lunch04%>%left_join(AVG_PR_FRPM04,by="District Code")
+lunch04<-subset(lunch04,select=c("District Code","District Name","AVG_PR_FRPM"))
+
+lunch04<-subset(lunch04,!duplicated(lunch04$`District Code`))
+lunch04$Year<-2004
+lunch04
+```
+
+2005
+```{r}
+lunch05<-read_excel("C:/Users/mbunge/Desktop/stats133project/freereduced/2005.xls", sheet = 2)
+
+colnames(lunch05)
+lunch05<-subset(lunch05,select=c("DCODE","District Name","School Name","Percent FRPM"))
+
+col_names<-c("District Code","District Name","School Name","PR FRPM")
+names(lunch05)<-col_names
+
+
+AVG_PR_FRPM05<-lunch05%>%group_by(`District Code`)%>%summarise(AVG_PR_FRPM=mean(`PR FRPM`))
+
+lunch05<-lunch05%>%left_join(AVG_PR_FRPM05,by="District Code")
+lunch05<-subset(lunch05,select=c("District Code","District Name","AVG_PR_FRPM"))
+
+lunch05<-subset(lunch05,!duplicated(lunch05$`District Code`))
+lunch05$Year<-2005
+lunch05
+```
+2006
+```{r}
+lunch06<-read_excel("C:/Users/mbunge/Desktop/stats133project/freereduced/2006.xls", sheet = 2)
+
+colnames(lunch06)
+lunch06<-subset(lunch06,select=c("District Code","LEA Name","School Name","October 2006 Percent FRPM"))
+
+
+col_names<-c("District Code","District Name","School Name","PR FRPM")
+names(lunch06)<-col_names
+
+lunch06$`PR FRPM`=as.numeric(lunch06$`PR FRPM`)
+
+AVG_PR_FRPM06<-lunch06%>%group_by(`District Code`)%>%summarise(AVG_PR_FRPM=mean(`PR FRPM`))
+
+
+lunch06<-lunch06%>%left_join(AVG_PR_FRPM06,by="District Code")
+lunch06<-subset(lunch06,select=c("District Code","District Name","AVG_PR_FRPM"))
+
+lunch06<-subset(lunch06,!duplicated(lunch06$`District Code`))
+lunch06$Year<-2006
+lunch06
+
+
+
+```
+
+2007
+```{r}
+lunch07<-read_excel("C:/Users/mbunge/Desktop/stats133project/freereduced/2007.xls", sheet = 2)
+
+colnames(lunch07)
+lunch07<-subset(lunch07,select=c("District Code","LEA Name","School Name","October 2007 Percent FRPM"))
+
+
+col_names<-c("District Code","District Name","School Name","PR FRPM")
+names(lunch07)<-col_names
+
+lunch07$`PR FRPM`=as.numeric(lunch07$`PR FRPM`)
+
+AVG_PR_FRPM07<-lunch07%>%group_by(`District Code`)%>%summarise(AVG_PR_FRPM=mean(`PR FRPM`))
+
+
+lunch07<-lunch07%>%left_join(AVG_PR_FRPM07,by="District Code")
+lunch07<-subset(lunch07,select=c("District Code","District Name","AVG_PR_FRPM"))
+
+lunch07<-subset(lunch07,!duplicated(lunch07$`District Code`))
+lunch07$Year<-2007
+lunch07
+```
+
+2008
+```{r}
+lunch08<-read_excel("C:/Users/mbunge/Desktop/stats133project/freereduced/2008.xls", sheet = 2)
+
+colnames(lunch08)
+lunch08<-subset(lunch08,select=c("District Code","LEA Name","School Name","October 2008 Percent FRPM"))
+
+
+col_names<-c("District Code","District Name","School Name","PR FRPM")
+names(lunch08)<-col_names
+
+lunch08$`PR FRPM`=as.numeric(lunch08$`PR FRPM`)
+
+AVG_PR_FRPM08<-lunch08%>%group_by(`District Code`)%>%summarise(AVG_PR_FRPM=mean(`PR FRPM`))
+
+
+lunch08<-lunch08%>%left_join(AVG_PR_FRPM08,by="District Code")
+lunch08<-subset(lunch08,select=c("District Code","District Name","AVG_PR_FRPM"))
+
+lunch08<-subset(lunch08,!duplicated(lunch08$`District Code`))
+lunch08$Year<-2008
+lunch08
+```
+
+2009
+```{r}
+lunch09<-read_excel("C:/Users/mbunge/Desktop/stats133project/freereduced/2009.xls", sheet = 2)
+
+colnames(lunch09)
+lunch09<-subset(lunch09,select=c("District Code","LEA Name","School Name","October 2009 Percent FRPM"))
+
+
+col_names<-c("District Code","District Name","School Name","PR FRPM")
+names(lunch09)<-col_names
+
+lunch09$`PR FRPM`=as.numeric(lunch09$`PR FRPM`)
+
+AVG_PR_FRPM09<-lunch09%>%group_by(`District Code`)%>%summarise(AVG_PR_FRPM=mean(`PR FRPM`))
+
+
+lunch09<-lunch09%>%left_join(AVG_PR_FRPM09,by="District Code")
+lunch09<-subset(lunch09,select=c("District Code","District Name","AVG_PR_FRPM"))
+
+lunch09<-subset(lunch09,!duplicated(lunch09$`District Code`))
+lunch09$Year<-2009
+lunch09
+```
+
+2010
+```{r}
+lunch10<-read_excel("C:/Users/mbunge/Desktop/stats133project/freereduced/2010.xls", sheet = 2)
+
+colnames(lunch10)
+lunch10<-subset(lunch10,select=c("District Code","LEA Name","School Name","October 2010 Percent FRPM"))
+
+
+col_names<-c("District Code","District Name","School Name","PR FRPM")
+names(lunch10)<-col_names
+
+lunch10$`PR FRPM`=as.numeric(lunch10$`PR FRPM`)
+
+AVG_PR_FRPM10<-lunch10%>%group_by(`District Code`)%>%summarise(AVG_PR_FRPM=mean(`PR FRPM`))
+
+
+lunch10<-lunch10%>%left_join(AVG_PR_FRPM10,by="District Code")
+lunch10<-subset(lunch10,select=c("District Code","District Name","AVG_PR_FRPM"))
+
+lunch10<-subset(lunch10,!duplicated(lunch10$`District Code`))
+lunch10$Year<-2010
+lunch10
+```
+
+
+2011
+```{r}
+lunch11<-read_excel("C:/Users/mbunge/Desktop/stats133project/freereduced/2011.xls", sheet = 2)
+
+colnames(lunch11)
+lunch11<-subset(lunch11,select=c("District Code","LEA Name","School Name","October 2011 Percent FRPM"))
+
+
+col_names<-c("District Code","District Name","School Name","PR FRPM")
+names(lunch11)<-col_names
+
+lunch11$`PR FRPM`=as.numeric(lunch11$`PR FRPM`)
+
+AVG_PR_FRPM11<-lunch11%>%group_by(`District Code`)%>%summarise(AVG_PR_FRPM=mean(`PR FRPM`))
+
+
+lunch11<-lunch11%>%left_join(AVG_PR_FRPM11,by="District Code")
+lunch11<-subset(lunch11,select=c("District Code","District Name","AVG_PR_FRPM"))
+
+lunch11<-subset(lunch11,!duplicated(lunch11$`District Code`))
+lunch11$Year<-2011
+lunch11
+
+```
+
+2012
+```{r}
+lunch12<-read_excel("C:/Users/mbunge/Desktop/stats133project/freereduced/2012.xls", sheet = 2)
+
+colnames(lunch12)
+lunch12<-subset(lunch12,select=c("District Code","District Name","School Name","October 2012 Percent (%) Eligible FRPM \n(Ages 5-17)"))
+
+
+col_names<-c("District Code","District Name","School Name","PR FRPM")
+names(lunch12)<-col_names
+
+lunch12$`PR FRPM`=as.numeric(lunch12$`PR FRPM`)
+
+AVG_PR_FRPM12<-lunch12%>%group_by(`District Code`)%>%summarise(AVG_PR_FRPM=mean(`PR FRPM`))
+
+
+lunch12<-lunch12%>%left_join(AVG_PR_FRPM12,by="District Code")
+lunch12<-subset(lunch12,select=c("District Code","District Name","AVG_PR_FRPM"))
+
+lunch12<-subset(lunch12,!duplicated(lunch12$`District Code`))
+lunch12$Year<-2012
+lunch12
+
+```
+
+All Data from 2004 to 2012
+```{r}
+lunch<-rbind(lunch04,lunch05,lunch06,lunch07,lunch08,lunch09,lunch10,lunch11,lunch12)
+row.has.na <- apply(lunch, 1, function(x){any(is.na(x))})
+sum(row.has.na)
+lunch <- lunch[!row.has.na,]
+lunch
+
+
+avg_lunch<-lunch%>%group_by(Year)%>%summarise(avg_FPRM=mean(AVG_PR_FRPM))
+avg_lunch
+```
+
+Graphs
+```{r}
+
+#by district type variables
+
+```
+
+```{r}
+library(ggplot2)
+lunch_avg_ca<- ggplot(data=avg_lunch, aes(x=Year, y=avg_FPRM)) +
+    geom_line() +
+    geom_point()+
+  labs(title="2004 to 2012",x="Year", y="Avg Percent of Students on FPRM")  
+lunch_avg_ca
+
+lunch<- ggplot(data=funding1998_2012, aes(x=year, y=avg_current_expense_per_ada_union)) +
+    geom_line() +
+    geom_point()+
+   labs(title="1998 to 2012 Avg Funding, Unified",x="Year", y="Avg Funding Per Student") 
+avg_ada_union
+
+
+
+
+
+```
