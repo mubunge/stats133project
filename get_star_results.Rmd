@@ -27,6 +27,56 @@ excludeFiles <- grepl("entities|Entities", files, perl = T)
 files <- files[!excludeFiles]
 files <- lapply(files, function(x) {paste("star_results/", x, sep = "")})
 
+# store 1998 names (34 cols) so we can make later tables consistent
+names1998 <- c("District_Code",
+               "Test_Date",
+               "Record_Type",
+               "Summary_Type",
+               "Reading_Mean_SS",
+               "Reading_Mean_PR",
+               "Reading_PAC75",
+               "Reading_PACAT50",
+               "Reading_PAC25",
+               "Math_Mean_SS",
+               "Math_Mean_PR",
+               "Math_PAC75",
+               "Math_PACAT50",
+               "Math_PAC25",
+               "Language_Mean_SS",
+               "Language_Mean_PR",
+               "Language_PAC75",
+               "Language_PACAT50",
+               "Language_PAC25",
+               "Spelling_Mean_SS",
+               "Spelling_Mean_PR",
+               "Spelling_PAC75",
+               "Spelling_PACAT50",
+               "Spelling_PAC25",
+               "Science_Mean_SS",
+               "Science_Mean_PR",
+               "Science_PAC75",
+               "Science_PACAT50",
+               "Science_PAC25",
+               "Social_Science_Mean_SS",
+               "Social_Science_Mean_PR",
+               "Social_Science_PAC75",
+               "Social_Science_PACAT50",
+               "Social_Science_PAC25"
+               )
+
+# function to group by District, Record and Summary types
+# then calculate the means of each column
+get_means <- function(t) {
+    t[, -1] <- t[, -1] %>%
+        sapply(as.numeric)
+
+    t <- t %>%
+        group_by(District_Code, Record_Type, Summary_Type) %>%
+        summarise_each(funs(mean(., na.rm = T)))
+
+    return (t)
+}
+
 ## now get the stuff we want
 for (f in files) {
     if (grepl("csv|CSV", f)) {
@@ -45,12 +95,7 @@ for (f in files) {
                           Science_Total_Valid, Social_Science_Total_Valid,
                           Filler))
 
-            cur[, -1] <- cur[, -1] %>%
-                sapply(as.numeric)
-
-            cur <- cur %>%
-                group_by(District_Code, Record_Type, Summary_Type) %>%
-                summarise_each(funs(mean(., na.rm = T)))
+            cur <- get_means(cur)
         } 
         # 1999
         else if (f == "star_results/1999/tdtestdata.tab") {
@@ -59,48 +104,16 @@ for (f in files) {
                 select(-c(1, 3, 7:9, 10, 16, 22, 28, 34, 40, 46:77))
 
             # Column names are not listed in the file, so we'll set them here
-            colnames(cur) <- c("District_Code",
-                               "Test_Date",
-                               "Record_Type",
-                               "Summary_Type",
-                               "Reading_Mean_SS",
-                               "Reading_Mean_PR",
-                               "Reading_PAC75",
-                               "Reading_PACAT50",
-                               "Reading_PAC25",
-                               "Math_Mean_SS",
-                               "Math_Mean_PR",
-                               "Math_PAC75",
-                               "Math_PACAT50",
-                               "Math_PAC25",
-                               "Language_Mean_SS",
-                               "Language_Mean_PR",
-                               "Language_PAC75",
-                               "Language_PACAT50",
-                               "Language_PAC25",
-                               "Spelling_Mean_SS",
-                               "Spelling_Mean_PR",
-                               "Spelling_PAC75",
-                               "Spelling_PACAT50",
-                               "Spelling_PAC25",
-                               "Science_Mean_SS",
-                               "Science_Mean_PR",
-                               "Science_PAC75",
-                               "Science_PACAT50",
-                               "Science_PAC25",
-                               "Social_Science_Mean_SS",
-                               "Social_Science_Mean_PR",
-                               "Social_Science_PAC75",
-                               "Social_Science_PACAT50",
-                               "Social_Science_PAC25"
-                               )
-
-            cur[, -1] <- cur[, -1] %>%
-                sapply(as.numeric)
-
+            colnames(cur) <- names1998
+            cur <- get_means(cur)
+        }
+        # 2000
+        else if (f == "star_results/2000/tdtestdata.tab") {
+            cur <- read.table(f, sep = "\t", header = T)
             cur <- cur %>%
-                group_by(District_Code, Record_Type, Summary_Type) %>%
-                summarise_each(funs(mean(., na.rm = T)))
+                select(-c(1, 3, 4, 8:10, 11, 17, 23, 29, 35, 41, 47:79))
+            colnames(cur) <- names1998
+            cur <- get_means(cur)
         }
     }
 
@@ -119,4 +132,7 @@ head(res1998)
 
 res1999 <- read_feather("star_result_binaries/1999.feather")
 head(res1999)
+
+res2000 <- read_feather("star_result_binaries/2000.feather")
+head(res2000)
 ```
