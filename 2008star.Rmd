@@ -1,0 +1,84 @@
+---
+title: "Star results 2008 to 2012"
+author: ""
+date: ""
+output: 
+  html_document:
+    fig_height: 3
+    fig_width: 5
+---
+<!-- Don't edit in between this line and the one below -->
+```{r include=FALSE}
+# Don't delete this chunk if you are using the DataComputing package
+library(DataComputing)
+```
+*Source file* 
+```{r, results='asis', echo=FALSE}
+includeSourceDocuments()
+```
+<!-- Don't edit the material above this line -->
+2008
+```{r}
+#Fixing up Numbers Data
+library(dplyr)
+star2008_numbers<-read.table(file.choose(),header=T,sep=",")
+col_names <- c("County Code","District Code","School Code","Charter Number","Year","Subgroup","Test","CAPA Assessment Level","Total STAR Enrollment","Total Tested At Entity Level","Total Tested At Subgroup Level","Grade","Test Id","STAR Reported Enrollment/CAPA Eligible","Students Tested","Percent Tested","Mean Scaled Score","CST/CAPA Percentage Advanced","CST/CAPA Percentage Proficient","CST/CAPA Percentage At Or Above Proficient","CST/CAPA Percentage Basic","CST/CAPA Percentage Below Basic","CST/CAPA Percentage Far Below Basic","Mean PR","PAC75","PAC50","PAC25","Students with Scores","CMA/CAPA/STS Average Percent Correct")
+names(star2008_numbers)<-col_names
+
+```
+
+```{r}
+#making everything numeric
+star2008_numbers
+star2008_numbers$`Mean Scaled Score`=as.numeric(star2008_numbers$`Mean Scaled Score`)
+star2008_numbers$`CST/CAPA Percentage Advanced`=as.numeric(star2008_numbers$`CST/CAPA Percentage Advanced`)
+star2008_numbers$`CST/CAPA Percentage Proficient`=as.numeric(star2008_numbers$`CST/CAPA Percentage Proficient`)
+star2008_numbers$`CST/CAPA Percentage Basic`=as.numeric(star2008_numbers$`CST/CAPA Percentage Basic`)
+star2008_numbers$`CST/CAPA Percentage Below Basic`=as.numeric(star2008_numbers$`CST/CAPA Percentage Below Basic`)
+
+```
+```{r}
+#making new mean variables
+star2008_mean<-star2008_numbers%>%group_by(`District Code`)%>%summarise(mean_star_scores=mean(`Mean Scaled Score`))
+
+star2008_mean_PRadvanced<-star2008_numbers%>%group_by(`District Code`)%>%summarise(mean_star_PRadvanced=mean(`CST/CAPA Percentage Advanced`))
+
+star2008_mean_PRproficient<-star2008_numbers%>%group_by(`District Code`)%>%summarise(mean_star_PRproficient=mean(`CST/CAPA Percentage Proficient`))
+
+star2008_mean_PRbasic<-star2008_numbers%>%group_by(`District Code`)%>%summarise(mean_star_PRbasic=mean(`CST/CAPA Percentage Basic`))
+
+star2008_mean_PRbelowbasic<-star2008_numbers%>%group_by(`District Code`)%>%summarise(mean_star_PRbelowbasic=mean(`CST/CAPA Percentage Below Basic`))
+
+
+means<-data.frame(star2008_mean,star2008_mean_PRadvanced,star2008_mean_PRproficient,star2008_mean_PRbasic,star2008_mean_PRbelowbasic)
+
+means<-subset(means,select = c("District.Code","mean_star_scores","mean_star_PRadvanced","mean_star_PRproficient","mean_star_PRbasic","mean_star_PRbelowbasic"))
+
+col_names<-c("District Code","star2008_mean","star2008_mean_PRadvanced","star2008_mean_PRproficient","star2008_mean_PRbasic","star2008_mean_PRbelowbasic
+means")
+
+names(means)<-col_names
+
+means
+```
+
+```{r}
+#fixing the names table
+star2008_names<-read.table(file.choose(),header=T,sep=",")
+col_names<-c("County Code","District Code","School Code","Charter Number","Year","Type ID","County Name","District Name","School Name","Zip Code")
+names(star2008_names)<-col_names
+star2008_names<-subset(star2008_names,select=c("Year","District Code","County Name","District Name"))
+
+```
+```{r}
+star2008_names<-subset(star2008_names,!duplicated(star2008_names$`District Code`))
+```
+
+
+```{r}
+#joining the table by district code
+#0 indicates the
+star2008<-star2008_names%>%left_join(means,by="District Code")
+
+star2008
+```
