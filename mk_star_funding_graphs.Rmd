@@ -11,6 +11,7 @@ Compiled on `r base::date()`.
 library(DataComputing)
 library(printr)
 library(feather)
+library(plyr)
 ```
 <!-- put your content after this line -->
 *Source file* 
@@ -59,12 +60,19 @@ star_all <- rbind(star2001,
                   star2011,
                   star2012)
 
-head(star_all)
+# get weighted means and serialize
+star_weighted <- ddply(star_all, .(District_Code, Year), summarise,
+            weighted.mean(PercentProficient, Enrollment))
+colnames(star_weighted)[3] <- "PercentProficient"
+write_feather(star_weighted,
+              "star_result_binaries/all_years_proficient_weighted.feather")
+head(star_weighted)
 
 # funding
 funding <- read.table("funding1998_2012.txt", sep = "\t", header = T)
 head(funding)
 
+# Old things
 ## both for graph stuff
 #star_vs_funding <- merge(star_all, funding, by = "Year")
 #star_vs_funding$Year <- factor(star_vs_funding$Year)
