@@ -64,6 +64,7 @@ star_all <- rbind(star2001,
 star_weighted <- ddply(star_all, .(District_Code, Year), summarise,
             weighted.mean(PercentProficient, Enrollment, na.rm = T))
 colnames(star_weighted)[3] <- "PercentProficient"
+star_weighted$Year <- factor(star_weighted$Year)
 write_feather(star_weighted,
               "star_result_binaries/all_years_proficient_weighted.feather")
 head(star_weighted)
@@ -73,16 +74,19 @@ funding <- read.table("funding1998_2012.txt", sep = "\t", header = T)
 funding <- select(funding, c(1, 2, 3, 6, 8))
 colnames(funding) <- c("County_Code", "District", "District_Code",
                        "Expense_per_ADA", "Year")
+funding$Year <- factor(funding$Year)
 head(funding)
 
-## both for graph stuff
+# both for graph stuff
 star_vs_funding <- merge(star_weighted, funding,
                          by = c("District_Code", "Year"))
 head(star_vs_funding)
 
-## graph stuff
-#star_vs_funding %>% ggplot(aes(x = expense_per_ada, y = PercentProficient)) +
-#                    geom_point(aes(col = Year)) +
-#                    labs(x = "Expense Per ADA",
-#                         y = "Mean Percentage Proficient")
+# graph stuff
+star_vs_funding %>% ggplot(aes(x = Expense_per_ADA, y = PercentProficient)) +
+                    geom_point(aes(col = Year)) +
+                    scale_x_continuous(limits = c(0, 75000)) +
+                    scale_y_continuous(limits = c(0, 55)) +
+                    labs(x = "Expense Per ADA",
+                         y = "Mean Percentage Proficient")
 ```
