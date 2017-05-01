@@ -1,0 +1,62 @@
+---
+title: "Untitled"
+author: ""
+date: ""
+output: 
+  html_document:
+    fig_height: 3
+    fig_width: 5
+---
+<!-- Don't edit in between this line and the one below -->
+```{r include=FALSE}
+# Don't delete this chunk if you are using the DataComputing package
+library(DataComputing)
+library(dplyr)
+```
+*Source file* 
+```{r, results='asis', echo=FALSE}
+includeSourceDocuments()
+```
+<!-- Don't edit the material above this line -->
+
+
+```{r}
+grads <- read.table("C:\\Users\\Jamie\\Desktop\\stat133\\project\\graduates\\filesgrads1998.txt", header = T)
+updatedgrads <- grads %>% 
+  select(1,4,5) %>% 
+  mutate(district = floor(CDS_CODE / 10^7) %% 10^5) %>%
+  group_by(district) %>%
+  summarize(UC_GRADS = sum(UC_GRADS), GRADS = sum(GRADS), YEAR = 1998) %>%
+  arrange(desc(GRADS)) %>%
+  filter(GRADS > 0) %>%
+  mutate(PERCENT_UC = UC_GRADS / GRADS * 100)
+
+
+
+
+for (year in c("1999", "2000",  "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012")) {
+num = as.numeric(year)
+path = sprintf("C:\\Users\\Jamie\\Desktop\\stat133\\project\\graduates\\filesgrads%s.txt", year)
+nextgrads <- read.table(path, header = T)
+
+nextupdatedgrads <- nextgrads %>% 
+  select(1,4,5) %>% 
+  mutate(district = floor(CDS_CODE / 10^7) %% 10^5) %>%
+  group_by(district) %>%
+  summarize(UC_GRADS = sum(UC_GRADS), GRADS = sum(GRADS), YEAR = num) %>%
+  arrange(desc(GRADS)) %>%
+  filter(GRADS > 0) %>%
+  mutate(PERCENT_UC = UC_GRADS / GRADS * 100)
+
+
+updatedgrads <- rbind(updatedgrads, nextupdatedgrads)
+}
+
+updatedgrads
+
+
+write.table(updatedgrads, "C:\\Users\\Jamie\\Desktop\\stat133\\project\\Grads1998to2012.txt", sep="\t") 
+
+```
+
+
