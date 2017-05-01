@@ -1,0 +1,78 @@
+---
+title: "Generate Star Test Averages vs State Funding Graphs"
+author: "William Jow"
+date: ""
+output: html_document
+---
+<!-- leave this material as is -->
+Compiled on `r base::date()`.
+
+```{r include = FALSE}
+library(DataComputing)
+library(printr)
+library(feather)
+```
+<!-- put your content after this line -->
+*Source file* 
+```{r, results='asis', echo=FALSE}
+includeSourceDocuments()
+```
+
+<!-- Don't edit the material above this line -->
+```{r, eval = T}
+# scores
+star2001 <- read_feather("star_result_binaries/2001.feather")
+head(star2001)
+star2002 <- read_feather("star_result_binaries/2002.feather")
+head(star2002)
+star2003 <- read_feather("star_result_binaries/2003.feather")
+head(star2003)
+star2004 <- read_feather("star_result_binaries/2004.feather")
+head(star2004)
+star2005 <- read_feather("star_result_binaries/2005.feather")
+head(star2005)
+star2006 <- read_feather("star_result_binaries/2006.feather")
+head(star2006)
+star2007 <- read_feather("star_result_binaries/2007.feather")
+head(star2007)
+star2008 <- read_feather("star_result_binaries/2008.feather")
+head(star2008)
+star2009 <- read_feather("star_result_binaries/2009.feather")
+head(star2009)
+star2010 <- read_feather("star_result_binaries/2010.feather")
+head(star2010)
+star2011 <- read_feather("star_result_binaries/2011.feather")
+head(star2011)
+star2012 <- read_feather("star_result_binaries/2012.feather")
+head(star2012)
+
+star_all <- rbind(star2001,
+                  star2002,
+                  star2003,
+                  star2004,
+                  star2005,
+                  star2006,
+                  star2007,
+                  star2008,
+                  star2009,
+                  star2010,
+                  star2011,
+                  star2012)
+
+head(star_all)
+
+# funding
+funding <- read.table("funding1998_2012.txt", sep = "\t", header = T)
+head(funding)
+
+## both for graph stuff
+#star_vs_funding <- merge(star_all, funding, by = "Year")
+#star_vs_funding$Year <- factor(star_vs_funding$Year)
+#head(star_vs_funding)
+#
+## graph stuff
+#star_vs_funding %>% ggplot(aes(x = expense_per_ada, y = PercentProficient)) +
+#                    geom_point(aes(col = Year)) +
+#                    labs(x = "Expense Per ADA",
+#                         y = "Mean Percentage Proficient")
+```

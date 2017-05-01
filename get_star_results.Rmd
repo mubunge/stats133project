@@ -78,15 +78,18 @@ get_means98 <- function(t) {
 }
 
 # assumes that t is a data frame with columns
-# District_Code, Year, PercentProficient
+# District_Code, School_Code, Year, Enrollment, PercentProficient
 get_means01 <- function(t) {
     t[, -1] <- t[, -1] %>%
         sapply(as.numeric)
 
-    colnames(t)[1] <- "District_Code"
-    colnames(t)[3] <- "PercentProficient"
+    colnames(t) <- c("District_Code",
+                     "School_Code",
+                     "Year",
+                     "Enrollment",
+                     "PercentProficient")
     t <- t %>%
-        group_by(District_Code) %>%
+        group_by(District_Code, School_Code) %>%
         summarise_each(funs(mean(., na.rm = T)))
 
     return (t)
@@ -139,21 +142,21 @@ for (f in files) {
             cur <- read.table(f, sep = "\t", header = T)
             cur <- read.table("star_results/2001/2001_tdtestdata.tab", sep = "\t", header = T)
             cur <- cur %>%
-                select(c(2, 5, 20))
+                select(c(2, 3, 5, 10, 20))
             cur <- get_means01(cur)
         }
         #2002
         else if (year == "2002") {
             cur <- read.csv(f)
             cur <- cur %>%
-                select(c(2, 5, 20))
+                select(c(2, 3, 5, 10, 20))
             cur <- get_means01(cur)
         }
         # 2003 - 2012
         else {
             cur <- read.csv(f)
             cur <- cur %>%
-                select(c(2, 5, 19))
+                select(c(2, 3, 5, 15, 19))
             cur <- get_means01(cur)
         }
 
