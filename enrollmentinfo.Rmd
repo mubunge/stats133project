@@ -1,0 +1,86 @@
+---
+title: "Untitled"
+author: ""
+date: ""
+output: 
+  html_document:
+    fig_height: 3
+    fig_width: 5
+---
+<!-- Don't edit in between this line and the one below -->
+```{r include=FALSE}
+# Don't delete this chunk if you are using the DataComputing package
+library(DataComputing)
+library(dplyr)
+```
+*Source file* 
+```{r, results='asis', echo=FALSE}
+includeSourceDocuments()
+```
+<!-- Don't edit the material above this line -->
+
+```{r}
+funding_table <- read.table("C:/Users/Jamie/Desktop/stat133/project/stats133project-master/Mains/funding1998_2012.txt")
+grads <- read.table("C:/Users/Jamie/Desktop/stat133/project/stats133project-master/Mains/Grads1998to2012.txt")
+star_tests <- read.table("C:/Users/Jamie/Desktop/stat133/project/stats133project-master/Mains/star_2003_2012.txt")
+star_tests %>% filter(District.Code == 68403)
+star_tests %>% filter(District.Code == 64170)
+
+```
+
+```{r}
+funding_table
+
+
+colnames(grads)[1] <- "LEA.ID"
+grads
+combined <- merge(funding_table, grads, by = c("LEA.ID", "YEAR")) %>%
+  filter(LEA.TYPE != "Elementary") %>%
+  arrange(desc(GRADS))
+
+```
+
+
+
+
+```{r}
+combined %>% arrange(desc(CURRENT.EXPENSE.PER.ADA))
+```
+
+```{r}
+year = "1998"
+numyear = as.numeric(year)
+path = sprintf("C:/Users/Jamie/Desktop/stat133/project/enrollment/enr%s.txt", year)
+enroll <- read.table(path, header = T)
+updated_enroll <- enroll %>%
+  mutate(COUNTY = floor(CDS_CODE / 10^12)) %>%
+  mutate(district = floor(CDS_CODE / 10^7) %% 10^5) %>%
+  mutate(GR_Kto5 = KDGN + GR_1 + GR_2 + GR_3 + GR_4 + GR_5) %>%
+  mutate(GR_6to8 = GR_6 + GR_7 + GR_8) %>%
+  mutate(GR_9to12 = GR_9 + GR_10 + GR_11 + GR_12)%>%
+  
+  select(21, 22, 26, 23, 24, 25, 19) %>%
+  group_by(district) %>%
+  summarize(COUNTY = COUNTY,
+            GR_Kto5 = sum(GR_Kto5), 
+            GR_6to8 = sum(GR_6to8), 
+            GR_9to12 = sum(GR_9to12),
+            ENR_TOTAL = sum(ENR_TOTAL)) %>%
+  mutate(YEAR = numyear)
+updated_enroll
+  
+
+            
+
+```  
+
+
+  ```
+updatedgrads <- grads %>% 
+  select(1,4,5) %>% 
+  mutate(district = floor(CDS_CODE / 10^7) %% 10^5) %>%
+  group_by(district) %>%
+  summarize(UC_GRADS = sum(UC_GRADS), GRADS = sum(GRADS), YEAR = 1998) %>%
+  arrange(desc(GRADS)) %>%
+  filter(GRADS > 0) %>%
+  mutate(PERCENT_UC = UC_GRADS / GRADS * 100)
