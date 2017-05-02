@@ -82,11 +82,34 @@ star_vs_funding <- merge(star_weighted, funding,
                          by = c("District_Code", "Year"))
 head(star_vs_funding)
 
+star_vs_funding_year <- star_vs_funding %>% 
+                        ddply(.(Year),
+                              summarise,
+                              PercentProficient = mean(PercentProficient, na.rm = T),
+                              Expense_per_ADA = mean(Expense_per_ADA, na.rm = T))
+head(star_vs_funding_year)
+
 # graph stuff
-star_vs_funding %>% ggplot(aes(x = Expense_per_ADA, y = PercentProficient)) +
+star_vs_funding_plot <- star_vs_funding %>% ggplot(aes(x = Expense_per_ADA, y = PercentProficient)) +
                     geom_point(aes(col = Year)) +
                     scale_x_continuous(limits = c(0, 75000)) +
                     scale_y_continuous(limits = c(0, 55)) +
                     labs(x = "Expense Per ADA",
-                         y = "Mean Percentage Proficient")
+                         y = "Mean Percentage Proficient",
+                         title = "Percentage of Proficient Students vs. Funding per Student by District")
+
+star_vs_funding_year_plot <- star_vs_funding_year %>% ggplot(aes(x = Expense_per_ADA, y = PercentProficient)) +
+                    geom_point(aes(col = Year)) +
+                    labs(x = "Expense Per ADA",
+                         y = "Mean Percentage Proficient",
+                         title = "Statewide Proficient Percentage vs. Statewide Average Student Funding")
+
+# export pdfs of the graphs
+pdf(file = "star_vs_funding_images/star_vs_funding_district.pdf")
+print(star_vs_funding_plot)
+dev.off()
+
+pdf(file = "star_vs_funding_images/star_vs_funding_year.pdf")
+print(star_vs_funding_year_plot)
+dev.off()
 ```
