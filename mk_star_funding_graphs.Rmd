@@ -134,15 +134,15 @@ dev.off()
 # "Percentage of Proficient Students vs. Funding per Student by District"
 # Expense_per_ADA is the funding per student in the district
 # PercentProficient is the percentage of proficient students in the district
-lm(formula = Expense_per_ADA ~ PercentProficient, data = star_vs_funding)
+summary(lm(formula = Expense_per_ADA ~ PercentProficient, data = star_vs_funding))
 
 # "Statewide Proficient Percentage vs. Statewide Average Student Funding"
 # Expense_per_ADA is the funding per student in the state
 # PercentProficient is the percentage of proficient students in the state
-lm(formula = Expense_per_ADA ~ PercentProficient, data = star_vs_funding_year)
+summary(lm(formula = Expense_per_ADA ~ PercentProficient, data = star_vs_funding_year))
 
 # "Statewide Proficient Percentage vs. Time"
 # Year is... the year
 # PercentProficient is the percentage of proficient students in the state
-lm(formula = Year ~ PercentProficient, data = star_vs_funding_year)
+summary(lm(formula = as.numeric(Year) ~ PercentProficient, data = star_vs_funding_year))
 ```

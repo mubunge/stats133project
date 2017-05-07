@@ -41,16 +41,12 @@ District Code, District Type, PercentProficient, Year (1998 to 2012), UC Elgible
 
 ----
 
-<img src='images/fprmvstar.png' width='100%'>
+<img src='images/fprmvstar.png' height='300vh'>
+
+<img src='images/fprmvuc.png' height='300vh'>
 
 ----
 
-<img src='images/fprmvuc.png' width='100%'>
+<img src='images/fundingvstar.png' height='300vh'>
 
-----
-
-<img src='images/fundingvstar.png' width='100%'>
-
-----
-
-<img src='images/fundingvuc.jpg' width='100%'>
+<img src='images/fundingvuc.jpg' height='300vh'>
