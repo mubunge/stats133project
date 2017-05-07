@@ -100,9 +100,22 @@ star_vs_funding_plot <- star_vs_funding %>% ggplot(aes(x = Expense_per_ADA, y = 
 
 star_vs_funding_year_plot <- star_vs_funding_year %>% ggplot(aes(x = Expense_per_ADA, y = PercentProficient)) +
                     geom_point(aes(col = Year)) +
+                    geom_line(aes(group = 1), col = "grey20", alpha = 0.5) +
                     labs(x = "Expense Per ADA",
                          y = "Mean Percentage Proficient",
                          title = "Statewide Proficient Percentage vs. Statewide Average Student Funding")
+
+star_vs_time_state_plot <- star_vs_funding_year %>% ggplot(aes(x = Year, y = PercentProficient)) +
+                    geom_point() +
+                    geom_line(aes(group = 1), col = "grey20", alpha = 0.5) +
+                    labs(x = "Year",
+                         y = "Mean Percentage Proficient",
+                         title = "Statewide Proficient Percentage vs. Time")
+
+# show graphs
+star_vs_funding_plot
+star_vs_funding_year_plot
+star_vs_time_state_plot
 
 # export pdfs of the graphs
 pdf(file = "star_vs_funding_images/star_vs_funding_district.pdf")
@@ -112,4 +125,24 @@ dev.off()
 pdf(file = "star_vs_funding_images/star_vs_funding_year.pdf")
 print(star_vs_funding_year_plot)
 dev.off()
+
+pdf(file = "star_vs_time_images/star_vs_time_state.pdf")
+print(star_vs_time_state_plot)
+dev.off()
+
+# do lm stuff
+# "Percentage of Proficient Students vs. Funding per Student by District"
+# Expense_per_ADA is the funding per student in the district
+# PercentProficient is the percentage of proficient students in the district
+lm(formula = Expense_per_ADA ~ PercentProficient, data = star_vs_funding)
+
+# "Statewide Proficient Percentage vs. Statewide Average Student Funding"
+# Expense_per_ADA is the funding per student in the state
+# PercentProficient is the percentage of proficient students in the state
+lm(formula = Expense_per_ADA ~ PercentProficient, data = star_vs_funding_year)
+
+# "Statewide Proficient Percentage vs. Time"
+# Year is... the year
+# PercentProficient is the percentage of proficient students in the state
+lm(formula = Year ~ PercentProficient, data = star_vs_funding_year)
 ```
