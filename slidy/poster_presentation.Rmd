@@ -32,7 +32,9 @@ California Department of Education
 
 <strong>Methods</strong>
 
-In class: Regex, Data Structures, Loops, Data Wrangling
+In class: Regex, Data Structures, Loops, Data Wrangling, Statistical Modeling
+<br>
+<br>
 Outside class: Feather
 
 <strong>Important variables</strong>
